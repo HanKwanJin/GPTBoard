@@ -1,1 +1,6 @@
 rootProject.name = 'GPTBoard'
+
+include 'app'
+include 'common'
+include 'domain'
+include 'web'
