@@ -8,6 +8,10 @@ group = 'dev.be'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
 
+bootJar {
+    archiveFileName = 'app.jar'
+}
+
 repositories {
     mavenCentral()
 }
@@ -19,6 +23,9 @@ dependencies {
     // Lombok
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
+
+    // mysql
+    runtimeOnly 'com.mysql:mysql-connector-j'
 
     // multi module
     implementation project(':common')
