@@ -2,6 +2,7 @@ package dev.be.app;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 
 @SpringBootApplication(
     scanBasePackages = {
@@ -11,8 +12,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
         "dev.be.domain"
     }
 )
+@EntityScan("dev.be.domain.entity")
 public class AppApplication {
-
     public static void main(String[] args) {
         SpringApplication.run(AppApplication.class, args);
     }
