@@ -1,9 +1,11 @@
 package dev.be.gptboard.domain;
 
+import static javax.persistence.FetchType.*;
 import static lombok.AccessLevel.PROTECTED;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -22,9 +24,9 @@ public class ArticleComment extends AuditingFields {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Setter @ManyToOne private Article article;
+    @Setter @ManyToOne(fetch = LAZY, optional = false) private Article article;
 
-    @Setter @ManyToOne private Member member;
+    @Setter @ManyToOne(fetch = LAZY, optional = false) private Member member;
 
     @Setter @Column(updatable = false) private Long parentCommentId;
 
