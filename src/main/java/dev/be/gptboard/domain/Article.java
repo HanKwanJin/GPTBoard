@@ -3,6 +3,10 @@ package dev.be.gptboard.domain;
 import static javax.persistence.FetchType.*;
 import static lombok.AccessLevel.PROTECTED;
 
+import java.util.LinkedHashSet;
+import java.util.Objects;
+import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -10,6 +14,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -31,6 +37,11 @@ public class Article extends AuditingFields{
 
     @Setter @Column(nullable = false, length = 10000) private String content;
 
+    @ToString.Exclude
+    @OrderBy("createdAt DESC")
+    @OneToMany(cascade = CascadeType.ALL)
+    private Set<ArticleComment> articleComments = new LinkedHashSet<>();
+
     private Article(Member member, String title, String content) {
         this.member = member;
         this.title = title;
@@ -39,5 +50,22 @@ public class Article extends AuditingFields{
 
     public static Article of(Member member, String title, String content) {
         return new Article(member, title, content);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Article)) {
+            return false;
+        }
+        Article article = (Article) o;
+        return getId().equals(article.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId());
     }
 }
