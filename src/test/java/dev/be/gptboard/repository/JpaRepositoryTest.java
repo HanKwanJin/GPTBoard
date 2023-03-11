@@ -79,7 +79,6 @@ class JpaRepositoryTest {
         /*
          * 게시글을 지울 때 게시글과 관련된 댓글도 모두 지워줘야한다.
          */
-        articleCommentRepository.deleteAll();
         articleRepository.delete(article);
 
         //then

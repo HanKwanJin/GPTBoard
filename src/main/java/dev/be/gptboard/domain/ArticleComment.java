@@ -24,23 +24,20 @@ public class ArticleComment extends AuditingFields {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Setter @ManyToOne(fetch = LAZY, optional = false) private Article article;
-
     @Setter @ManyToOne(fetch = LAZY, optional = false) private Member member;
 
     @Setter @Column(updatable = false) private Long parentCommentId;
 
     @Setter @Column(nullable = false, length = 500) private String content;
 
-    public ArticleComment(Article article, Member member, Long parentCommentId, String content) {
-        this.article = article;
+    public ArticleComment(Member member, Long parentCommentId, String content) {
         this.member = member;
         this.parentCommentId = parentCommentId;
         this.content = content;
     }
 
-    public static ArticleComment of(Article article, Member member, String content) {
+    public static ArticleComment of(Member member, String content) {
         /* 처음 생성한 댓글은 부모 댓글이 없다. */
-        return new ArticleComment(article, member, null, content);
+        return new ArticleComment(member, null, content);
     }
 }
