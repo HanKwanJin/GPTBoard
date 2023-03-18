@@ -18,8 +18,7 @@ import lombok.ToString;
 @NoArgsConstructor(access = PROTECTED)
 public class Member extends AuditingFields{
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Id @Column(length = 50) private String id;
 
     @Setter @Column(length = 100) private String nickname;
 
@@ -27,13 +26,20 @@ public class Member extends AuditingFields{
 
     @Setter @Column(length = 100) private String email;
 
-    public Member(String nickname, String password, String email) {
+    public Member(String id, String nickname, String password, String email, String createdBy) {
+        this.id = id;
         this.nickname = nickname;
         this.password = password;
         this.email = email;
+        this.createdBy = createdBy;
+        this.modifiedBy = createdBy;
     }
 
-    public static Member of(String nickname, String password, String email) {
-        return new Member(nickname, password, email);
+    public static Member of(String id, String nickname, String password, String email) {
+        return new Member(id, nickname, password, email, null);
+    }
+
+    public static Member of(String id, String nickname, String password, String email, String createdBy) {
+        return new Member(id, nickname, password, email, createdBy);
     }
 }

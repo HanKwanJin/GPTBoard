@@ -11,24 +11,7 @@ import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 import org.springframework.data.querydsl.binding.QuerydslBinderCustomizer;
 import org.springframework.data.querydsl.binding.QuerydslBindings;
 
-public interface ArticleRepository extends
-    JpaRepository<Article, Long>,
-    QuerydslPredicateExecutor<Article>,
-    QuerydslBinderCustomizer<QArticle>
-{
-    Page<Article> findByTitleContaining(String title, Pageable pageable);
-    Page<Article> findByContentContaining(String content, Pageable pageable);
-    Page<Article> findByMember_NicknameContaining(String nickname, Pageable pageable);
 
-    void deleteByIdAndMember_Id(Long articleId, Long memberId);
+public interface ArticleRepository extends JpaRepository<Article, Long> {
 
-    @Override
-    default void customize(QuerydslBindings bindings, QArticle root) {
-        bindings.excludeUnlistedProperties(true);
-        bindings.including(root.title, root.content, root.createdAt, root.createdBy);
-        bindings.bind(root.title).first(StringExpression::containsIgnoreCase);
-        bindings.bind(root.content).first(StringExpression::containsIgnoreCase);
-        bindings.bind(root.createdAt).first(DateTimeExpression::eq);
-        bindings.bind(root.createdBy).first(StringExpression::containsIgnoreCase);
-    }
 }
