@@ -1,9 +1,0 @@
-insert into member (nickname, password, email, created_at, created_by, modified_at, modified_by) values
-                                                                                                        ('hankwanjin', '1234', 'hankwanjin@email.com', '2023-03-01 11:11:11', 'hankwanjin', '2023-03-02 11:11:11', 'hankwanjin');
-insert into article (member_id, title, content, created_at, created_by, modified_at, modified_by) values
-                                                                                                        (1, 'title-test-1', 'content-test-1', '2023-03-11 11:11:11', 'hankwanjin', '2023-03-12 11:11:11', 'hankwanjin'),
-                                                                                                        (1, 'title-test-2', 'content-test-2', '2023-03-11 11:11:12', 'hankwanjin', '2023-03-12 11:11:12', 'hankwanjin'),
-                                                                                                        (1, 'title-test-3', 'content-test-3', '2023-03-11 11:11:13', 'hankwanjin', '2023-03-12 11:11:13', 'hankwanjin');
-insert into article_comment (member_id, parent_comment_id, content, created_at, created_by, modified_at, modified_by) values
-                                                                                                                                          (1, null, 'test-content-1', '2023-03-11 11:11:11', 'hankwanjin', '2023-03-12 11:11:11', 'hankwanjin'),
-                                                                                                                                          (1,    1, 'test-content-2', '2023-03-11 11:11:11', 'hankwanjin', '2023-03-12 11:11:11', 'hankwanjin');

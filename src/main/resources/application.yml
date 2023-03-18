@@ -13,17 +13,23 @@ spring:
       hibernate:
         format_sql: true
         default_batch_fetch_size: 100
-    open-in-view: false
-    defer-datasource-initialization: true
-  sql:
-    init:
-      mode: always
-
----
-
-spring:
-  config:
-    activate:
-      on-profile: test
-  datasource:
-    url: jdbc:h2:mem:testdb
+#    defer-datasource-initialization: true
+#  sql:
+#    init:
+#      mode: always
+  security:
+    oauth2:
+      client:
+        registration:
+          kakao:
+            client-id: ${KAKAO_CLIENT_ID}
+            client-secret: ${KAKAO_CLIENT_SECRET}
+            authorization-grant-type: authorization_code
+            redirect-uri: "{baseUrl}/login/oauth2/code/kakao"
+            client-authentication-method: POST
+        provider:
+          kakao:
+            authorization-uri: https://kauth.kakao.com/oauth/authorize
+            token-uri: https://kauth.kakao.com/oauth/token
+            user-info-uri: https://kapi.kakao.com/v2/user/me
+            user-name-attribute: id
